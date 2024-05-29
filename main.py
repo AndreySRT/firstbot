@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor, types
 from config import telegram_token
 from keyboard.keyboards import get_keyboard, get_keyboard_2
-from keyboard.key_inline import get_keyboard_inline
+from keyboard.key_inline import get_keyboard_inline, get_keyboard_inline_2
 
 
 bot = Bot(token = telegram_token)
@@ -34,7 +34,7 @@ async def second_button_click(message: types.message):
 
 @dp.message_handler(lambda message: message.text == 'Отправь фото собаки')
 async def third_button_click(message: types.message):
-    await bot.send_photo(message.chat.id, photo= 'https://avatars.dzeninfra.ru/get-zen_doc/9811263/pub_644f9292283fb47259c7c534_644f94be0d32d312f225ad14/scale_1200', caption='Вот и еще малыш!')
+    await bot.send_photo(message.chat.id, photo= 'https://avatars.dzeninfra.ru/get-zen_doc/9811263/pub_644f9292283fb47259c7c534_644f94be0d32d312f225ad14/scale_1200', caption='Вот и еще малыш!', reply_markup=get_keyboard_inline_2())
 
 @dp.message_handler(lambda message: message.text == 'Вернуться на первую клавиатуру')
 async def second_button_click(message: types.message):
