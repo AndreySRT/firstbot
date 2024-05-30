@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor, types
 from config import telegram_token
-from keyboard.keyboards import get_keyboard, get_keyboard_2
-from keyboard.key_inline import get_keyboard_inline, get_keyboard_inline_2
+from keyboard.keyboards import get_keyboard, get_keyboard_2, get_keyboard_3
+from keyboard.key_inline import get_keyboard_inline, get_keyboard_inline_2, get_keyboard_inline_3
 
 
 bot = Bot(token = telegram_token)
@@ -21,24 +21,32 @@ async def set_commands(bot: Bot):
 
 @dp.message_handler(commands='start')
 async def start(message: types.Message):
-    await message.answer('Привет, Бонжур, Хеллоу!', reply_markup=get_keyboard())  #Можно использовать тег reply но он будет пересылать твое сообщение, после писать твое сообщение.
+    await message.answer('Привет! Я твой персональный бот и друг, я помогу тебе с выбором шикарного ресторана за любую цену.', reply_markup=get_keyboard())  #Можно использовать тег reply но он будет пересылать твое сообщение, после писать твое сообщение.
 
-@dp.message_handler(lambda message: message.text == 'Отправь фото кота')
+@dp.message_handler(lambda message: message.text == 'Заведение с ценником в 2500р')
 async def first_button_click(message: types.message):
-    await bot.send_photo(message.chat.id, photo= 'https://i.pinimg.com/originals/12/9a/72/129a7210cd3b24388a377bdb200ff4dc.jpg', caption='Ссылка на сайт с котами', reply_markup=get_keyboard_inline())
+    await bot.send_photo(message.chat.id, photo= 'https://i4.photo.2gis.com/images/branch/0/30258560074423042_ebc5.jpg', caption='Эти два ресторана предоставляют общирный вид пищи за небольшую цену', reply_markup=get_keyboard_inline())
     #await message.answer('Ты нажал кнопку 1')
 
-@dp.message_handler(lambda message: message.text == 'Перейти на следующую клавиатуру')
+@dp.message_handler(lambda message: message.text == 'Перейти на другой ресторан')
 async def second_button_click(message: types.message):
-    await message.answer('Тут ты можешь попросить отправить фото собаки', reply_markup=get_keyboard_2())
+    await message.answer('Тут ты можешь посмотреть на рестораны с видом на Москву-реку', reply_markup=get_keyboard_2())
 
-@dp.message_handler(lambda message: message.text == 'Отправь фото собаки')
+@dp.message_handler(lambda message: message.text == 'Заведение с ценником в 5000р')
 async def third_button_click(message: types.message):
-    await bot.send_photo(message.chat.id, photo= 'https://avatars.dzeninfra.ru/get-zen_doc/9811263/pub_644f9292283fb47259c7c534_644f94be0d32d312f225ad14/scale_1200', caption='Вот и еще малыш!', reply_markup=get_keyboard_inline_2())
+    await bot.send_photo(message.chat.id, photo= 'https://image.eatout.ru/imager/0000/0000/0000/0500/0501/1100x/5000501.jpeg', caption='Вот и еще ресторан, который предоставляет общирный выбор тот же вид пищи только в цетре Москвы', reply_markup=get_keyboard_inline_2())
 
-@dp.message_handler(lambda message: message.text == 'Вернуться на первую клавиатуру')
-async def second_button_click(message: types.message):
-    await message.answer('Тут ты можешь попросить отправить фото кота', reply_markup=get_keyboard())
+@dp.message_handler(lambda message: message.text == 'Перейти на другой ресторан')
+async def fourth_button_click(message: types.message):
+    await message.answer('Тут ты можешь посмотреть на рестораны который любезно нам представила Москва-сити', reply_markup=get_keyboard_3())
+
+@dp.message_handler(lambda message: message.text == 'Заведение с ценником от 5000 тысяч и выше')
+async def fifth_button_click(message: types.message):
+    await bot.send_photo(message.chat.id, photo= 'https://static.tildacdn.com/tild6366-3762-4266-a533-636235393964/7.jpg', caption='Вот и еще ресторан, который предоставляет общирный выбор тот же вид пищи только в цетре Москвы и в Москва-сити', reply_markup=get_keyboard_inline_3())
+
+@dp.message_handler(lambda message: message.text == 'Вернуться назад')
+async def sixth_button_click(message: types.message):
+    await message.answer('Тут ты можешь посмотреть на рестораны окутанные Москвой-рекой', reply_markup=get_keyboard())
 
 @dp.message_handler(commands='help')
 async def help(message: types.Message):
