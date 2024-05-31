@@ -8,9 +8,9 @@ bot = Bot(token = telegram_token)
 dp = Dispatcher(bot)
 
 help_command = """
-/start - начать работу с ботом
-/help - список комманд
-/give - можешь получить уникальный стикер
+<b>/start</b> - <em>начать работу с ботом</em>
+<b>/help</b> - <em>список комманд</em>
+<b>/give</b> - <em>можешь получить уникальный стикер</em>
 """
 
 async def set_commands(bot: Bot):
@@ -53,7 +53,7 @@ async def sixth_button_click(message: types.message):
 
 @dp.message_handler(commands='help')
 async def help(message: types.Message):
-    await message.answer(text=help_command)
+    await message.answer(text=help_command, parse_mode="HTML")
     await message.delete()
 
 @dp.message_handler(commands='info')
@@ -83,6 +83,7 @@ async def echo(message: types.Message):
 
 async def on_startup(dispatcher): #Вызываем нашу функцию
     await set_commands(dispatcher.bot)
+    print('Я запустился!')
 
 
 if __name__ == '__main__':
